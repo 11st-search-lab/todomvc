@@ -1,20 +1,23 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+import TodoItems from './TodoItems';
+import useStore from '../../hooks/useStore';
+
 const TodoList = () => {
+  const { todoStore } = useStore();
+  const todoList = todoStore.getTodoList();
+
   return (
     <section className="main">
       <input id="toggle-all" className="toggle-all" type="checkbox" />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
-        <li className="completed">
-          <div className="view">
-            <input className="toggle" type="checkbox" checked={true} />
-            <label>{'todo title'}</label>
-            <button className="destroy" />
-          </div>
-        </li>
+        {todoList.map((todo) => (
+          <TodoItems key={todo.id} content={todo.content} />
+        ))}
       </ul>
     </section>
   );
 };
 
-export default TodoList;
+export default observer(TodoList);
