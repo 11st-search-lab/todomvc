@@ -13,7 +13,7 @@ const TodoList = () => {
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
         {todoList.map((todo) => (
-          <TodoItems key={todo.id} content={todo.content} />
+          <TodoItems key={todo.id} content={todo.content} completed={todo.isCompleted} id={todo.id} />
         ))}
       </ul>
     </section>
