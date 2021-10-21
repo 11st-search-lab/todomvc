@@ -6,13 +6,13 @@ class TodoStore {
   rootStore: RootStore;
   todoList = new Map();
   id: number;
-  completed: boolean;
+  isCompleted: boolean;
 
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       todoList: observable,
       id: observable,
-      completed: observable,
+      isCompleted: observable,
       makeTodo: action,
       addTodo: action,
       deleteTodo: action,
@@ -21,12 +21,12 @@ class TodoStore {
     });
     this.rootStore = rootStore;
     this.id = 0;
-    this.completed = false;
+    this.isCompleted = false;
   }
 
   makeTodo(todo: string) {
     this.id++;
-    return { id: this.id, content: todo, completed: false };
+    return { id: this.id, content: todo, isCompleted: false };
   }
 
   addTodo(todo: string) {
@@ -41,13 +41,13 @@ class TodoStore {
 
   completeTodo(id: number) {
     const todo = this.todoList.get(id);
-    const newTodo = { ...todo, completed: true };
+    const newTodo = { ...todo, isCompleted: true };
     this.todoList.set(id, newTodo);
   }
 
   toggleTodoCompleted(id: number) {
     const todo = this.todoList.get(id);
-    const newTodo = { ...todo, completed: !todo?.completed };
+    const newTodo = { ...todo, isCompleted: !todo?.isCompleted };
     this.todoList.set(id, newTodo);
   }
   getTodoList() {
