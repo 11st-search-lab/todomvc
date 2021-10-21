@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const TodoInput = () => {
   const [inputState, setInputState] = useState<string>('');
-  const store = useStore();
+  const { todoStore } = useStore();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -13,7 +13,7 @@ const TodoInput = () => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') store.todoStore.addTodo(inputState);
+    if (e.key === 'Enter') todoStore.addTodo(inputState);
   };
 
   return (
