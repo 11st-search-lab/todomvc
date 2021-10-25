@@ -16,8 +16,9 @@ class TodoStore {
       makeTodo: action,
       addTodo: action,
       deleteTodo: action,
+      deleteCompletedTodo: action,
       completeTodo: action,
-      toggleTodoCompleted: action,
+      toggleIsCompleted: action,
     });
 
     this.rootStore = rootStore;
@@ -39,17 +40,27 @@ class TodoStore {
     this.todoList.delete(id);
   }
 
+  deleteCompletedTodo() {
+    for (const [id, todo] of this.todoList.entries()) {
+      const { isCompleted } = todo;
+      isCompleted && this.todoList.delete(id);
+    }
+  }
+
   completeTodo(id: number) {
     const todo = this.todoList.get(id);
     const newTodo = { ...todo, isCompleted: true };
+
     this.todoList.set(id, newTodo);
   }
 
-  toggleTodoCompleted(id: number) {
+  toggleIsCompleted(id: number) {
     const todo = this.todoList.get(id);
     const newTodo = { ...todo, isCompleted: !todo?.isCompleted };
+
     this.todoList.set(id, newTodo);
   }
+
   getTodoList() {
     return [...this.todoList.values()];
   }

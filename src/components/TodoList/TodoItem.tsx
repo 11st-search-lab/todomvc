@@ -7,7 +7,7 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
   const { todoStore } = useStore();
 
   const handleCancelButtonClick = () => todoStore.deleteTodo(id);
-  const handleCheckboxClick = () => todoStore.toggleTodoCompleted(id);
+  const handleCheckboxClick = () => todoStore.toggleIsCompleted(id);
 
   return (
     <li className={completed ? 'completed' : ''}>
