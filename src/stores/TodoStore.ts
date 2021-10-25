@@ -6,29 +6,29 @@ class TodoStore {
   rootStore: RootStore;
   todoList = new Map();
   id: number;
-  isCompleted: boolean;
+  completed: boolean;
 
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       todoList: observable,
       id: observable,
-      isCompleted: observable,
+      completed: observable,
       makeTodo: action,
       addTodo: action,
       deleteTodo: action,
       deleteCompletedTodo: action,
       completeTodo: action,
-      toggleIsCompleted: action,
+      toggleCompleted: action,
     });
 
     this.rootStore = rootStore;
     this.id = 0;
-    this.isCompleted = false;
+    this.completed = false;
   }
 
   makeTodo(todo: string) {
     this.id++;
-    return { id: this.id, content: todo, isCompleted: false };
+    return { id: this.id, content: todo, completed: false };
   }
 
   addTodo(todo: string) {
@@ -45,8 +45,8 @@ class TodoStore {
 
   deleteCompletedTodo() {
     for (const [id, todo] of this.todoList.entries()) {
-      const { isCompleted } = todo;
-      isCompleted && this.todoList.delete(id);
+      const { completed } = todo;
+      completed && this.todoList.delete(id);
     }
 
     todoStorage.set(this.todoList);
@@ -54,17 +54,26 @@ class TodoStore {
 
   completeTodo(id: number) {
     const todo = this.todoList.get(id);
-    const newTodo = { ...todo, isCompleted: true };
+    const newTodo = { ...todo, completed: true };
 
     this.todoList.set(id, newTodo);
     todoStorage.set(this.todoList);
   }
 
-  toggleIsCompleted(id: number) {
+  toggleCompleted(id: number) {
     const todo = this.todoList.get(id);
-    const newTodo = { ...todo, isCompleted: !todo?.isCompleted };
+    const newTodo = { ...todo, completed: !todo?.completed };
 
     this.todoList.set(id, newTodo);
+    todoStorage.set(this.todoList);
+  }
+
+  toggleTotalCompleted(flag: boolean) {
+    for (const [id, todo] of this.todoList.entries()) {
+      const newTodo = { ...todo, completed: flag };
+      this.todoList.set(id, newTodo);
+    }
+
     todoStorage.set(this.todoList);
   }
 

@@ -5,7 +5,7 @@ import useStore from '../../hooks/useStore';
 const TodoCount = () => {
   const { todoStore } = useStore();
 
-  const count = todoStore.getTodoList().filter((todo) => !todo.isCompleted).length;
+  const count = todoStore.getTodoList().filter((todo) => !todo.completed).length;
   const countUnit = count > 1 ? 'items' : 'item';
 
   return (
