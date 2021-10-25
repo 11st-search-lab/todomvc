@@ -5,9 +5,7 @@ import useStore from '../../hooks/useStore';
 const TodoClearButton = () => {
   const { todoStore } = useStore();
 
-  const handleClearTodo = () => {
-    todoStore.deleteCompletedTodo();
-  };
+  const handleClearTodo = () => todoStore.deleteCompletedTodo();
 
   return (
     <button className="clear-completed" onClick={handleClearTodo}>
