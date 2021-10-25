@@ -1,22 +1,14 @@
 import React from 'react';
-import classNames from 'classnames';
-import TodoList from '../components/Todo/TodoList';
-import Filter from '../components/Filter';
-import TodoCount from '../components/Todo/TodoCount';
-import TodoInput from '../components/Todo/TodoInput';
+import Header from '../components/Header';
+import TodoList from '../components/TodoList';
+import Footer from '../components/Footer';
+
 const TodoPage = () => {
   return (
     <div>
-      <header className="header">
-        <h1>todos</h1>
-        <TodoInput />
-      </header>
+      <Header />
       <TodoList />
-      <footer className="footer">
-        <TodoCount />
-        <Filter />
-        <button className="clear-completed">Clear completed</button>
-      </footer>
+      <Footer />
     </div>
   );
 };

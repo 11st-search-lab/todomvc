@@ -1,7 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import useStore from '../../hooks/useStore';
-import { useState } from 'react';
 
 const TodoInput = () => {
   const [inputState, setInputState] = useState<string>('');

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import useStore from '../../hooks/useStore';
 import { ITodo } from '../../types/todoTypes';
 
-const TodoItems = ({ content, completed, id }: ITodo) => {
+const TodoItem = ({ content, completed, id }: ITodo) => {
   const { todoStore } = useStore();
 
   const handleCancelButtonClick = () => todoStore.deleteTodo(id);
@@ -20,4 +20,4 @@ const TodoItems = ({ content, completed, id }: ITodo) => {
   );
 };
 
-export default observer(TodoItems);
+export default observer(TodoItem);

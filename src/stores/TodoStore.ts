@@ -19,6 +19,7 @@ class TodoStore {
       completeTodo: action,
       toggleTodoCompleted: action,
     });
+
     this.rootStore = rootStore;
     this.id = 0;
     this.isCompleted = false;
@@ -31,7 +32,6 @@ class TodoStore {
 
   addTodo(todo: string) {
     const newTodo = this.makeTodo(todo);
-    //this.todoList.push(newTodo);
     this.todoList.set(this.id, newTodo);
   }
 

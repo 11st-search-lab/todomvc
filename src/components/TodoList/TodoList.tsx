@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import TodoItems from './TodoItems';
+import TodoItem from './TodoItem';
 import useStore from '../../hooks/useStore';
 
 const TodoList = () => {
@@ -13,7 +13,7 @@ const TodoList = () => {
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
         {todoList.map((todo) => (
-          <TodoItems key={todo.id} content={todo.content} completed={todo.isCompleted} id={todo.id} />
+          <TodoItem key={todo.id} content={todo.content} completed={todo.isCompleted} id={todo.id} />
         ))}
       </ul>
     </section>
