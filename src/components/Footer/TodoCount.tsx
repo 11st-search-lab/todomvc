@@ -6,10 +6,11 @@ const TodoCount = () => {
   const { todoStore } = useStore();
 
   const count = todoStore.getTodoList().filter((todo) => !todo.isCompleted).length;
+  const countUnit = count > 1 ? 'items' : 'item';
 
   return (
     <span className="todo-count">
-      <strong>{count}</strong> item left
+      <strong>{count}</strong> {countUnit} left
     </span>
   );
 };
