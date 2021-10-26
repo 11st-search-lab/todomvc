@@ -16,7 +16,13 @@ const TodoList = () => {
 
   return (
     <section className="main">
-      <input id="toggle-all" className="toggle-all" type="checkbox" checked={isChecked} onClick={handleCheckboxClick} />
+      <input
+        id="toggle-all"
+        className="toggle-all"
+        type="checkbox"
+        defaultChecked={isChecked}
+        onClick={handleCheckboxClick}
+      />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
         {todoList.map((todo) => (
