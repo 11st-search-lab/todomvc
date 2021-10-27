@@ -45,10 +45,6 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
 
   const handleCancelButtonClick = () => todoStore.deleteTodo(id);
 
-  const handleTodoClick = (e: React.MouseEvent) => {
-    console.log('click');
-  };
-
   const renderTodo = () =>
     isEditing ? (
       <input
@@ -69,9 +65,7 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
     );
 
   return renderFlag ? (
-    <li className={classNames({ completed: completed }, { editing: isEditing })} onClick={handleTodoClick}>
-      {renderTodo()}
-    </li>
+    <li className={classNames({ completed: completed }, { editing: isEditing })}>{renderTodo()}</li>
   ) : (
     <></>
   );
