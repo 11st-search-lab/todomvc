@@ -1,17 +1,18 @@
-import { makeObservable, observable, computed, action } from 'mobx';
+import { makeObservable, observable, action } from 'mobx';
 import RootStore from './RootStore';
 import { todoStorage } from '../utils/localStorage';
+import { ITodo } from '../types/todoTypes';
 class TodoStore {
   rootStore: RootStore;
   todoList = new Map();
   id: number;
-  completed: boolean;
+  path: string;
 
   constructor(rootStore: RootStore) {
     makeObservable(this, {
       todoList: observable,
       id: observable,
-      completed: observable,
+      path: observable,
       makeTodo: action,
       addTodo: action,
       deleteTodo: action,
@@ -22,10 +23,19 @@ class TodoStore {
 
     this.rootStore = rootStore;
     this.id = 0;
-    this.completed = false;
+    this.path = '/';
   }
 
-  makeTodo(todo: string) {
+  init() {
+    const prevTodo = todoStorage.get();
+    this.todoList = new Map([...prevTodo]);
+  }
+
+  setPath(path: string) {
+    this.path = path;
+  }
+
+  makeTodo(todo: string): ITodo {
     this.id++;
     return { id: this.id, content: todo, completed: false };
   }
@@ -34,6 +44,14 @@ class TodoStore {
     const newTodo = this.makeTodo(todo);
 
     this.todoList.set(this.id, newTodo);
+    todoStorage.set(this.todoList);
+  }
+
+  editTodo(id: number, todo: string) {
+    const prevTodo = this.todoList.get(id);
+    const newTodo = { ...prevTodo, content: todo };
+
+    this.todoList.set(id, newTodo);
     todoStorage.set(this.todoList);
   }
 
@@ -52,24 +70,24 @@ class TodoStore {
   }
 
   completeTodo(id: number) {
-    const todo = this.todoList.get(id);
-    const newTodo = { ...todo, completed: true };
+    const prevTodo = this.todoList.get(id);
+    const newTodo = { ...prevTodo, completed: true };
 
     this.todoList.set(id, newTodo);
     todoStorage.set(this.todoList);
   }
 
   toggleCompleted(id: number) {
-    const todo = this.todoList.get(id);
-    const newTodo = { ...todo, completed: !todo?.completed };
+    const prevTodo = this.todoList.get(id);
+    const newTodo = { ...prevTodo, completed: !prevTodo?.completed };
 
     this.todoList.set(id, newTodo);
     todoStorage.set(this.todoList);
   }
 
   toggleTotalCompleted(flag: boolean) {
-    for (const [id, todo] of this.todoList.entries()) {
-      const newTodo = { ...todo, completed: flag };
+    for (const [id, prevTodo] of this.todoList.entries()) {
+      const newTodo = { ...prevTodo, completed: flag };
       this.todoList.set(id, newTodo);
     }
 
