@@ -1,5 +1,4 @@
 import { makeObservable, observable, computed, action } from 'mobx';
-import { ITodo } from '../types/todoTypes';
 import RootStore from './RootStore';
 import { todoStorage } from '../utils/localStorage';
 class TodoStore {

@@ -1,6 +1,7 @@
 import React from 'react';
 import FilterButton from './FilterButton';
 import { filerData } from '../../mock/mockData';
+
 const Filter = () => {
   const { filters } = filerData;
   return (

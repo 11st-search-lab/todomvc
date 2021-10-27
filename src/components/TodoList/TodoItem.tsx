@@ -9,7 +9,6 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
   const [checked, setChecked] = useState(completed);
   const { todoStore } = useStore();
 
-  todoStore.init();
   const handleCancelButtonClick = () => todoStore.deleteTodo(id);
   const handleCheckboxChange = () => {
     todoStore.toggleCompleted(id);
