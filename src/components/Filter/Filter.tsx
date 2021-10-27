@@ -4,6 +4,7 @@ import { filerData } from '../../mock/mockData';
 
 const Filter = () => {
   const { filters } = filerData;
+
   return (
     <ul className="filters">
       {filters.map(({ path, className, text }, idx) => (

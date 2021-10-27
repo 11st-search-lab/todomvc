@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IFilterData } from '../../types/filterTypes';
+import { IFilterData } from '../../types/filterTypes';
 
 const FilterButton = ({ path, className, text }: IFilterData) => {
   return (

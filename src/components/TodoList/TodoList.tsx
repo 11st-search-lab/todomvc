@@ -5,9 +5,8 @@ import TodoItem from './TodoItem';
 import useStore from '../../hooks/useStore';
 
 const TodoList = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
   const { todoStore } = useStore();
-  const { completed } = todoStore;
   const todoList = todoStore.getTodoList();
 
   const handleCheckboxClick = () => {
@@ -26,8 +25,8 @@ const TodoList = () => {
       />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
-        {todoList.map((todo) => (
-          <TodoItem key={todo.id} content={todo.content} completed={todo.completed} id={todo.id} />
+        {todoList.map(({ id, content, completed }) => (
+          <TodoItem key={`todo-${id}`} content={content} completed={completed} id={id} />
         ))}
       </ul>
     </section>
