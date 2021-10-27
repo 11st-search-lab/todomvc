@@ -18,7 +18,7 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
   return (
     <li className={classNames({ completed: completed })}>
       <div className="view">
-        <input className="toggle" type="checkbox" defaultChecked={completed} onChange={handleCheckboxChange} />
+        <input className="toggle" type="checkbox" checked={completed} onChange={handleCheckboxChange} />
         <label>{content}</label>
         <button className="destroy" onClick={handleCancelButtonClick} />
       </div>

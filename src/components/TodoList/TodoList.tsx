@@ -7,6 +7,7 @@ import useStore from '../../hooks/useStore';
 const TodoList = () => {
   const [isChecked, setIsChecked] = useState(false);
   const { todoStore } = useStore();
+  const { completed } = todoStore;
   const todoList = todoStore.getTodoList();
 
   const handleCheckboxClick = () => {
