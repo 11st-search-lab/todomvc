@@ -30,7 +30,7 @@ const TodoItem = ({ content, completed, id }: ITodo) => {
     setIsEditing(!isEditing);
   };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (checkKeyBoardEnter(e.key)) {
       setIsEditing(!isEditing);
       todoStore.editTodo(id, editedTodo);
     }
